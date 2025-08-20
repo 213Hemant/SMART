@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Help - SMART Goal Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style></head>
+<body class="bg-gray-100 p-6 text-gray-800">
+  {% include 'navbar.html' %}
+
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center">🆘 How to Use SMART Goal Tracker</h1>
+
+    <div class="bg-white p-6 rounded shadow space-y-6 text-sm leading-relaxed">
+      <section>
+        <h2 class="text-lg font-semibold mb-2">🎯 What is a SMART Goal?</h2>
+        <p>A SMART goal is Specific, Measurable, Achievable, Relevant, and Time-bound. This app helps you break down your goals and track progress effectively.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold mb-2">📝 Adding a Goal</h2>
+        <ul class="list-disc ml-5 space-y-1">
+          <li>Go to the "Add Goal" page.</li>
+          <li>Fill in all SMART components.</li>
+          <li>Click <strong>Add Goal</strong> to save it.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold mb-2">📋 Viewing & Managing Goals</h2>
+        <ul class="list-disc ml-5 space-y-1">
+          <li>Click "View Goals" in the navbar to see your saved goals.</li>
+          <li>Use the <strong>Edit</strong>, <strong>Delete</strong>, or <strong>Complete/Undo</strong> buttons to manage each goal.</li>
+          <li>Use the <strong>➕</strong> button under each goal to log check-ins and monitor progress.</li>
+        </ul>
+      </section>
+
+      <!-- <section>
+        <h2 class="text-lg font-semibold mb-2">🔒 Data</h2>
+        <p>Your data is stored in a backend database connected to this app. Make sure your backend routes (`/add`, `/delete/<id>`, etc.) are functional.</p>
+      </section> -->
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Goal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style></head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold mb-4">Edit Goal</h1>
+    <form action="/edit/{{ goal[0] }}" method="post" class="grid gap-4">
+      <input name="title" value="{{ goal[1] }}" class="p-2 border rounded" required>
+      <input name="description" value="{{ goal[2] }}" class="p-2 border rounded">
+      <select name="type" class="p-2 border rounded" required>
+        <option value="short-term" {% if goal[3] == 'short-term' %}selected{% endif %}>Short-Term</option>
+        <option value="long-term" {% if goal[3] == 'long-term' %}selected{% endif %}>Long-Term</option>
+      </select>
+      <input name="specific" value="{{ goal[4] }}" class="p-2 border rounded">
+      <input name="measurable" value="{{ goal[5] }}" class="p-2 border rounded">
+      <input name="achievable" value="{{ goal[6] }}" class="p-2 border rounded">
+      <input name="relevant" value="{{ goal[7] }}" class="p-2 border rounded">
+      <input name="time_bound" value="{{ goal[8] }}" class="p-2 border rounded">
+      <button class="bg-blue-600 text-white px-4 py-2 rounded">Update Goal</button>
+    </form>
+  </div>
+</body>
+</html>

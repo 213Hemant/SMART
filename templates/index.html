@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Goal - SMART Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style></head>
+<body class="bg-gray-100 p-6 text-gray-800">
+  {% include 'navbar.html' %}
+
+  <div class="max-w-5xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center">➕ Add a SMART Goal</h1>
+
+    <form action="/add" method="post" class="bg-white p-6 rounded shadow space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input name="title" placeholder="Goal Title" class="p-2 border rounded" required>
+        <select name="type" class="p-2 border rounded" required>
+          <option value="">Select Type</option>
+          <option value="short-term">Short-Term</option>
+          <option value="long-term">Long-Term</option>
+        </select>
+        <input name="description" placeholder="Description" class="p-2 border rounded col-span-2">
+        {% for field in ['specific', 'measurable', 'achievable', 'relevant', 'time_bound'] %}
+          <input name="{{ field }}" placeholder="{{ field.capitalize() }}" class="p-2 border rounded">
+        {% endfor %}
+      </div>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Add Goal</button>
+    </form>
+  </div>
+</body>
+</html>

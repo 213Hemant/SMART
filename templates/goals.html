@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Goals - SMART Tracker</title>
+   <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-6 text-gray-800">
+  {% include 'navbar.html' %}
+
+
+
+  <div class="max-w-5xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center">🎯 Your SMART Goals</h1>
+
+<div class="mb-6 flex justify-end">
+  <form method="get" action="/goals">
+    <label for="filter" class="mr-2 font-medium text-sm">Filter:</label>
+    <select name="filter" id="filter" onchange="this.form.submit()"
+            class="border rounded px-3 py-1 text-sm">
+      <option value="" {% if not filter %}selected{% endif %}>All Goals</option>
+      <option value="short-term" {% if filter == 'short-term' %}selected{% endif %}>Short-Term</option>
+      <option value="long-term" {% if filter == 'long-term' %}selected{% endif %}>Long-Term</option>
+    </select>
+  </form>
+</div>
+
+
+    <section class="space-y-6">
+  {% for goal in goals %}
+    <article class="
+      p-4 rounded shadow border 
+      {% if goal[9] %}
+        bg-green-100 border-green-400
+      {% else %}
+        bg-white border-gray-200
+      {% endif %}
+    ">
+      <div class="flex flex-col md:flex-row justify-between gap-4">
+        <!-- Goal Content -->
+        <div class="flex-1">
+          <h2 class="text-xl font-semibold">
+            <span class="{% if goal[9] %}line-through text-green-700{% else %}text-gray-900{% endif %}">
+              {{ goal[1] }}
+            </span>
+            <span class="text-sm text-gray-500 ml-2">({{ goal[3] }})</span>
+          </h2>
+          <p class="mt-1 {% if goal[9] %}text-green-800{% else %}text-gray-600{% endif %}">{{ goal[2] }}</p>
+
+          <ul class="mt-2 text-sm space-y-1 {% if goal[9] %}text-green-900{% else %}text-gray-700{% endif %}">
+            <li><strong>Specific:</strong> {{ goal[4] }}</li>
+            <li><strong>Measurable:</strong> {{ goal[5] }}</li>
+            <li><strong>Achievable:</strong> {{ goal[6] }}</li>
+            <li><strong>Relevant:</strong> {{ goal[7] }}</li>
+            <li><strong>Time-bound:</strong> {{ goal[8] }}</li>
+          </ul>
+          <p class="text-xs mt-2 {% if goal[9] %}text-green-700{% else %}text-gray-400{% endif %}">
+            Created: {{ goal[10][:10] }}
+          </p>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-col gap-2 w-32">
+          <a href="/edit/{{ goal[0] }}" class="bg-blue-500 hover:bg-blue-600 text-white text-center py-2 rounded text-sm">Edit</a>
+          <a href="/delete/{{ goal[0] }}" class="bg-red-500 hover:bg-red-600 text-white text-center py-2 rounded text-sm">Delete</a>
+          <a href="/toggle_complete/{{ goal[0] }}" class="bg-green-500 hover:bg-green-600 text-white text-center py-2 rounded text-sm">
+            {{ 'Undo' if goal[9] else 'Complete' }}
+          </a>
+        </div>
+      </div>
+
+      <!-- Check-ins -->
+      <div class="mt-4">
+        <h3 class="text-sm font-semibold text-gray-600 mb-1">📋 Check-ins</h3>
+        {% for checkin in checkins[goal[0]] %}
+          <p class="text-xs text-gray-700 mb-1">📌 {{ checkin[2] }} <span class="text-gray-400">({{ checkin[3][:10] }})</span></p>
+        {% else %}
+          <p class="text-xs text-gray-400 italic">No check-ins yet.</p>
+        {% endfor %}
+
+        <form action="/checkin/{{ goal[0] }}" method="post" class="mt-2 flex gap-2">
+          <input name="note" placeholder="Add check-in note" class="p-1 border rounded flex-1 text-sm" required>
+          <button class="bg-gray-800 text-white px-2 py-1 text-sm rounded hover:bg-gray-900">➕</button>
+        </form>
+      </div>
+    </article>
+  {% endfor %}
+</section>
+
+  </div>
+</body>
+</html>
